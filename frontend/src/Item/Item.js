@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "./style.css";
+
 export class Item extends Component {
   onClick = e => {
-    this.props.decreaseProduct(this.props.id);
+    var apiUrl = "http://localhost:5000";
+    axios.put(apiUrl + `/items/${this.props.product._id}`).then(res => {
+      console.log(res);
+      this.props.decreaseProduct(this.props.product._id);
+    });
   };
   render() {
     return (
@@ -11,6 +17,7 @@ export class Item extends Component {
           <img className="image" src={this.props.product.image} alt="" />
         </div>
         <div className="details">
+          {}
           {this.props.product.title}
           <br />
           Avail Items : {this.props.product.quantity}
