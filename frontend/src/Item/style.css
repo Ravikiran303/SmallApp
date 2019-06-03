@@ -1,0 +1,24 @@
+.item {
+  height: auto;
+  width: 100%;
+  margin: auto;
+  box-shadow: 1px 1px 6px 1px gray;
+  border-radius: 4px;
+}
+.image {
+  border-radius: 2px;
+  width: 20%;
+}
+.details {
+  text-align: center;
+  font-family: cursive;
+  padding: 5px;
+  font-size: 14px;
+}
+.add-button {
+  width: 100px;
+  background: rgb(223, 117, 20); /* this is an orange */
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
