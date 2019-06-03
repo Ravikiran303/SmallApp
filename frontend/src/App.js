@@ -1,17 +1,17 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Cart } from "./Cart/Cart";
 import { Products } from "./Products/Products";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <Switch>
-          <Route exact path="/Cart" component={Cart} />
           <Route exact path="/" component={Products} />
+          <Route exact path="/Cart" component={Cart} />
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

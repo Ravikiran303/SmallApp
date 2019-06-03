@@ -1,6 +1,7 @@
 .products {
-  max-width: 100%;
+  max-width: 80%;
   padding: 15px;
+  margin: auto;
 }
 .notification {
   background-color: #555;
