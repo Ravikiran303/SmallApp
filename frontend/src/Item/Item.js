@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./style.css";
 export class Item extends Component {
   onClick = e => {
-    console.log(this.props.product.quantity);
+    this.props.decreaseProduct(this.props.id);
   };
   render() {
     return (

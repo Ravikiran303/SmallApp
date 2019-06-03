@@ -1,7 +1,4 @@
 .products {
   max-width: 100%;
-  grid-row-gap: 10px;
-  justify-content: space-evenly;
-  margin: auto;
-  display: grid;
+  padding: 15px;
 }

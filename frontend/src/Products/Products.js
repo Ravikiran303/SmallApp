@@ -4,7 +4,7 @@ import "./style.css";
 
 export class Products extends Component {
   state = {
-    product: [
+    products: [
       {
         image:
           "https://4.imimg.com/data4/JG/QK/ANDROID-55939837/product-500x500.jpeg",
@@ -48,11 +48,27 @@ export class Products extends Component {
       }
     ]
   };
+  decreaseItem = id => {
+    var e = this.state.products;
+    var neee = e[id];
+    if (neee.quantity !== 0) {
+      neee.quantity -= 1;
+      console.log(neee);
+    }
+    this.setState({
+      product: e
+    });
+  };
   render() {
     return (
       <div className="products">
-        {this.state.product.map((product, i) => (
-          <Item product={product} key={i} />
+        {this.state.products.map((product, index) => (
+          <Item
+            product={product}
+            key={index}
+            id={index}
+            decreaseProduct={this.decreaseItem}
+          />
         ))}
       </div>
     );
