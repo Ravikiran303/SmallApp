@@ -26,15 +26,34 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Products");
 });
+
 app.post("/items", (req, res) => {
   console.log(req.body);
   Product.create(req.body).then(responce => {
     res.status(201).json(responce);
   });
 });
+
 app.get("/items", (req, res) => {
-  Product.find({}).then(result => {
-    res.status(200).send(result);
+  Product.find({}).exec(function(err, items) {
+    if (err) {
+      res.send("something is wrong");
+    } else {
+      res.status(200).json(items);
+    }
+  });
+});
+
+app.put("/items/:id", (req, res) => {
+  var id = mongoose.Types.ObjectId(req.params.id);
+  Product.updateOne({ _id: id }, { $inc: { quantity: -1 } }, function(
+    err,
+    result
+  ) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(result);
   });
 });
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
