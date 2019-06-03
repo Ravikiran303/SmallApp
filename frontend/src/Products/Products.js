@@ -59,17 +59,27 @@ export class Products extends Component {
       product: e
     });
   };
+  goToCart = e => {
+    this.props.history.push("/Cart");
+  };
   render() {
     return (
       <div className="products">
-        {this.state.products.map((product, index) => (
-          <Item
-            product={product}
-            key={index}
-            id={index}
-            decreaseProduct={this.decreaseItem}
-          />
-        ))}
+        <div>
+          <button className="notification" onClick={this.goToCart}>
+            Cart
+          </button>
+        </div>
+        <div>
+          {this.state.products.map((product, index) => (
+            <Item
+              product={product}
+              key={index}
+              id={index}
+              decreaseProduct={this.decreaseItem}
+            />
+          ))}
+        </div>
       </div>
     );
   }
