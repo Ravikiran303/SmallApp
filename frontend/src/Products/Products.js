@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Item from "../Item/Item";
+import "./style.css";
 
 export class Products extends Component {
   state = {
@@ -47,7 +49,13 @@ export class Products extends Component {
     ]
   };
   render() {
-    return <div className="products">Products</div>;
+    return (
+      <div className="products">
+        {this.state.product.map((product, i) => (
+          <Item product={product} key={i} />
+        ))}
+      </div>
+    );
   }
 }
 
