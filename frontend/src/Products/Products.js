@@ -21,10 +21,10 @@ export class Products extends Component {
   };
   decreaseItem = id => {
     var Product = this.state.products;
-    var dummy = Product.findIndex(function(product) {
+    var index = Product.findIndex(function(product) {
       return product._id === id;
     });
-    var e = Product[dummy];
+    var e = Product[index];
     e.quantity--;
     this.setState({
       product: Product
