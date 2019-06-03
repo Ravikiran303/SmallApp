@@ -32,4 +32,9 @@ app.post("/items", (req, res) => {
     res.status(201).json(responce);
   });
 });
+app.get("/items", (req, res) => {
+  Product.find({}).then(result => {
+    res.status(200).send(result);
+  });
+});
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
