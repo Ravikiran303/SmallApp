@@ -47,28 +47,34 @@ app.get("/items", (req, res) => {
 
 app.put("/items/:id", (req, res) => {
   var id = mongoose.Types.ObjectId(req.params.id);
-  // Product.updateOne({ _id: id }, { $inc: { quantity: -1 } }, function(
-  //   err,
-  //   result
-  // ) {
-  //   if (err) {
-  //     res.send(err);
-  //   }
-  // var obj = Object.assign({}, req.body, { productId: req.body.id });
-  // delete obj.id;
-
-  Cart.findOne({ productId: id }).then(result1 => {
-    console.log(result1, "hello");
-    if (result1) {
-      result1.quantity++;
-      res.send(result1);
-      return result1.save();
-    } else {
-      Cart.create(Object.assign({}, obj, { quantity: 1 })).then(responce => {
-        res.status(201).json(responce);
-      });
+  Product.updateOne({ _id: id }, { $inc: { quantity: -1 } }, function(
+    err,
+    result
+  ) {
+    if (err) {
+      res.send(err);
     }
+    var obj = Object.assign({}, req.body, { productId: req.body.id });
+    delete obj.id;
+    Cart.findOne({ productId: id }).then(result1 => {
+      if (result1) {
+        result1.quantity++;
+        res.send(result1);
+        return result1.save();
+      } else {
+        Cart.create(Object.assign({}, obj, { quantity: 1 })).then(responce => {
+          res.status(201).json(responce);
+        });
+      }
+    });
   });
 });
-
+app.get("/cart", (req, res) => {
+  Cart.find({}).exec(function(err, items) {
+    if (err) {
+      res.status(404).send(err);
+    }
+    res.send(items);
+  });
+});
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
