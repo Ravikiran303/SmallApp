@@ -6,6 +6,7 @@ var mongoose = require("mongoose");
 const mongoURI = "mongodb://localhost:27017/SimpleApp";
 
 const Product = require("./models/Product");
+const Cart = require("./models/Cart");
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -46,14 +47,28 @@ app.get("/items", (req, res) => {
 
 app.put("/items/:id", (req, res) => {
   var id = mongoose.Types.ObjectId(req.params.id);
-  Product.updateOne({ _id: id }, { $inc: { quantity: -1 } }, function(
-    err,
-    result
-  ) {
-    if (err) {
-      res.send(err);
+  // Product.updateOne({ _id: id }, { $inc: { quantity: -1 } }, function(
+  //   err,
+  //   result
+  // ) {
+  //   if (err) {
+  //     res.send(err);
+  //   }
+  // var obj = Object.assign({}, req.body, { productId: req.body.id });
+  // delete obj.id;
+
+  Cart.findOne({ productId: id }).then(result1 => {
+    console.log(result1, "hello");
+    if (result1) {
+      result1.quantity++;
+      res.send(result1);
+      return result1.save();
+    } else {
+      Cart.create(Object.assign({}, obj, { quantity: 1 })).then(responce => {
+        res.status(201).json(responce);
+      });
     }
-    res.send(result);
   });
 });
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
