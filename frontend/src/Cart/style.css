@@ -1,0 +1,19 @@
+.item {
+  height: 200px;
+  width: 100%;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 6px 1px gray;
+  border-radius: 4px;
+  display: flex;
+}
+.image {
+  border-radius: 2px;
+  width: 300px;
+  height: 150px;
+}
+.details {
+  text-align: center;
+  font-family: cursive;
+  padding: 5px;
+  font-size: 14px;
+}
