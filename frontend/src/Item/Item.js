@@ -5,10 +5,16 @@ import "./style.css";
 export class Item extends Component {
   onClick = e => {
     var apiUrl = "http://localhost:5000";
-    axios.put(apiUrl + `/items/${this.props.product._id}`).then(res => {
-      console.log(res);
-      this.props.decreaseProduct(this.props.product._id);
-    });
+    axios
+      .put(apiUrl + `/items/${this.props.product._id}`, {
+        title: this.props.product.title,
+        price: this.props.product.price,
+        image: this.props.product.image
+      })
+      .then(res => {
+        console.log(res);
+        this.props.decreaseProduct(this.props.product._id);
+      });
   };
   render() {
     return (

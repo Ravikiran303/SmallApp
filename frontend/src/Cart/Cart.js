@@ -23,7 +23,7 @@ export class Cart extends Component {
                 <br />
                 No of Items : {items.quantity}
                 <br />
-                Price : {items.quantity * items.price}
+                Price : {items.price}
                 <br />
               </div>
             </div>
