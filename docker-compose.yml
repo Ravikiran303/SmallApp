@@ -1,0 +1,37 @@
+version: "3.2"
+
+services:
+  smallapp-frontend:
+    container_name: smallapp-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    links:
+      - simpleapp_backend
+    networks:
+      - webappnetwork
+  simpleapp_backend:
+    container_name: simpleapp_backend
+    build:
+      context: Backend
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    links:
+      - mongo_new
+    networks:
+      - webappnetwork
+  mongo_new:
+    image: mongo
+    container_name: mongo_new
+    restart: always
+    ports:
+      - "27017:27017"
+    command: mongod --bind_ip_all
+    networks:
+      - webappnetwork
+networks:
+  webappnetwork:
+    driver: bridge
